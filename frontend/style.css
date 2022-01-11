@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url(https://gitcdn.xyz/repo/googlefonts/noto-emoji/master/fonts/NotoColorEmoji.ttf);
+}
+
+#message{
+  padding-top: 100px;
+  width:100%;
+  text-align:center;
+  font-size: 72px;
+  text-decoration: double;
+}
