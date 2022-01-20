@@ -1,0 +1,5 @@
+-create rcTogether app
+-spin up bot server / api on replit
+-connect existing front end to replit back end
+-connect replit back end to rcTogether app
+-decide on permanent home for deployment and reconnect
