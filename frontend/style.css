@@ -3,10 +3,99 @@
   src: url(https://gitcdn.xyz/repo/googlefonts/noto-emoji/master/fonts/NotoColorEmoji.ttf);
 }
 
-#message{
-  padding-top: 100px;
-  width:100%;
-  text-align:center;
-  font-size: 72px;
-  text-decoration: double;
+/* base properties */
+body {
+  background-color: black;
+  color: white;
+}
+
+#footer {
+  display: flex;
+  position: absolute;
+  top: 90%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#namaste {
+  color: rgba(0, 0, 0, .75);
+  text-shadow: 0px 0px 15px #fff
+}
+
+#message, #messagebg {
+  position: absolute;
+  text-align: center;
+  font-size: 4em;
+  margin: 150px auto;
+}
+
+
+/*-------------ANIMATIONS-------------*/
+
+/* sliding color gradient behind text*/
+.gradientmask {
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg,
+      #231557 0%,
+      #44107a 29%,
+      #ff1361 67%,
+      #fff800 100%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientmask 2s linear infinite alternate;
+  display: inline-block;
+}
+
+@keyframes gradientmask {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+/* properties for waterwave */
+#message.waterwave {
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px #03a9f4;
+}
+
+#messagebg.waterwave {
+  text-transform: uppercase;
+  color: #03a9f4;
+  animation: waterwave 4s ease-in-out infinite;
+}
+
+
+@keyframes waterwave {
+  0%, 100% {
+    clip-path: polygon(0% -45%,
+        16% 44%,
+        33% -50%,
+        54% 60%,
+        70% 61%,
+        84% 59%,
+        100% -52%,
+        100% 100%,
+        0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 60%,
+        15% 65%,
+        34% 66%,
+        51% 62%,
+        67% 50%,
+        84% 45%,
+        100% 46%,
+        100% 100%,
+        0% 100%);
+  }
 }
