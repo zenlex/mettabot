@@ -18,3 +18,4 @@ Under Consideration:
 
 - Twillio / SMS connection
 - SVG Animation with Vanilla JS
+- Programmatically generated character level animation

@@ -98,7 +98,7 @@ const newmsg = `${p1[Math.floor(Math.random() * p1.length)]} ${
 msgContainer.textContent = newmsg;
 msgBg.textContent = newmsg;
 //add random animation
-const animationClasses = ['gradientmask', 'waterwave'];
+const animationClasses = ['gradientmask', 'waterwave', 'jumping-shadows'];
 const animindex = Math.floor(Math.random() * animationClasses.length);
 msgContainer.classList.add(animationClasses[animindex]);
 msgBg.classList.add(animationClasses[animindex]);
