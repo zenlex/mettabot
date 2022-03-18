@@ -1,0 +1,15 @@
+{
+  "name": "mettabot-server",
+  "version": "1.0.0",
+  "description": "backend for mettabot app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Erich Keil aka zenlex",
+  "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  }
+}

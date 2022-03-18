@@ -7,6 +7,6 @@ const app = http.createServer(function (request, response) {
   response.end(JSON.stringify({message: "Hello World"}))
 })
 
-const PORT = 3001;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT);
 
