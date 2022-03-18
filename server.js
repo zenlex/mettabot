@@ -14,7 +14,7 @@ const app = http.createServer(function (request, response) {
     response.end(JSON.stringify({text:newmsg}))
   } else {
     let filePath = './public' + request.url;
-    if (request.url == '/') {
+    if (request.url == '/' || request.url == '//') {
       filePath = './public/index.html';
     }
 
