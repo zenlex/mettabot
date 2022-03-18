@@ -7,6 +7,11 @@
 body {
   background-color: black;
   color: white;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 #footer {
@@ -23,11 +28,16 @@ body {
   text-shadow: 0px 0px 15px #fff
 }
 
+#message-container {
+  width: 100vw;
+  padding: 50px;
+}
+
 #message, #messagebg {
   position: absolute;
   text-align: center;
   font-size: 4em;
-  margin: 150px auto;
+  margin: 50px auto;
 }
 
 
@@ -125,7 +135,6 @@ body {
   text-transform: uppercase;
   font-size: calc(2rem + 5vw);
   text-align: center;
-  margin: 0;
   animation: shadows 1.8s ease-in infinite, move 1.8s ease-in infinite;
   letter-spacing: 0.4rem;
 }

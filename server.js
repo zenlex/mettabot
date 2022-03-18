@@ -1,13 +1,17 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const getMsg = require('./messagegen');
 
 const app = http.createServer(function (request, response) {
   //request logger
   console.log(`request ${request.method} ${request.url}`);
-  if(request.url === '/api/' && request.method === 'GET'){
+
+  if(request.url === '/api' && request.method === 'GET'){
     response.writeHead(200, {contentType: 'application/json'})
-    response.end({message: 'Hello World'})
+    const newmsg  = getMsg();
+    console.log('server generated message: ', newmsg)
+    response.end(JSON.stringify({text:newmsg}))
   } else {
     let filePath = './public' + request.url;
     if (request.url == '/') {
