@@ -11,6 +11,7 @@ The format is simple - there are 4 parts (files labeled p1...p4).
 - Part 2 - The subject of the compliment: e.g. "your hair today"
 - Part 3 - The compliment: e.g. "is the best I've ever seen"
 - Part 4 - The closer: e.g. "without a doubt."
+
 *follow exisiting examples in the array for formatting*
 
 Keeping it simple on this one to study 'the bones':
