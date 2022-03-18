@@ -14,6 +14,9 @@ The format is simple - there are 4 parts (files labeled p1...p4).
 
 *follow exisiting examples in the array for formatting*
 
+## API Endpoint
+Submit a GET request to /api and you should recieve a JSON object with a text property containing your message. 
+## Description
 Keeping it simple on this one to study 'the bones':
 
 - Vanilla Node Server
@@ -28,5 +31,5 @@ Coming Attractions:
 Under Consideration:
 
 - Twillio / SMS connection
-- SVG Animation with Vanilla JS
+- SVG Animation 
 - Programmatically generated character level animation
