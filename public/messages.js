@@ -6,7 +6,6 @@ const setContent = (url) => {
   const text = fetch(url)
   .then(response => response.json())
   .then(({text}) => {
-  console.log(text)
   msgContainer.textContent = text;
   msgBg.textContent = text;
   }
