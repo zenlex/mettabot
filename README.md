@@ -3,7 +3,17 @@ Maitrī (Sanskrit; Pali: mettā) means benevolence, loving-kindness, friendlines
 
 A creative project for experimenting with css/svg animation, speech synthesis, and chat bot APIs. 
 
-Keeping it simple on this one:
+## Contribution
+If you'd like to add additional phrases to mettabot, submit a pull request on the files in `/messages` that adds suggested strings to the array. 
+
+The format is simple - there are 4 parts (files labeled p1...p4). 
+- Part 1 - The greeting: e.g."Hello there,"
+- Part 2 - The subject of the compliment: e.g. "your hair today"
+- Part 3 - The compliment: e.g. "is the best I've ever seen"
+- Part 4 - The closer: e.g. "without a doubt."
+*follow exisiting examples in the array for formatting*
+
+Keeping it simple on this one to study 'the bones':
 
 - Vanilla Node Server
 - Vanilla HTML Single Page Client with CSS Animations
