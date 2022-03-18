@@ -20,8 +20,6 @@ main {
 
 #footer {
   display: flex;
-  position: absolute;
-  top: 90%;
   width: 100%;
   justify-content: center;
   align-items: center;
