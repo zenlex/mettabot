@@ -16,8 +16,6 @@ body {
 
 main {
   padding: 10px 30px;
-  display: flex;
-  flex-direction: column;
 }
 
 #footer {
@@ -35,6 +33,7 @@ main {
 #message-container {
   width: 100vw;
   padding: 50px;
+  margin: 10px auto;
 }
 
 #message, #messagebg {
