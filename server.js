@@ -6,9 +6,9 @@ const app = http.createServer(function (request, response) {
   //request logger
   console.log(`request ${request.method} ${request.url}`);
 
-  let filePath = './build' + request.url;
+  let filePath = './public' + request.url;
   if (request.url == '/') {
-    filePath = './build/index.html';
+    filePath = './public/index.html';
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();
