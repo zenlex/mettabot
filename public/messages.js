@@ -1,6 +1,6 @@
 const msgContainer = document.getElementById('message');
 const msgBg = document.getElementById('messagebg');
-const API_URL = 'http://localhost:8000/api'
+const API_URL = window.location.origin + '/api'
 
 const setContent = (url) => {
   const text = fetch(url)
