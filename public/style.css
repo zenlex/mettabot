@@ -14,10 +14,6 @@ body {
   align-items: center;
 }
 
-main {
-  padding: 10px 30px;
-}
-
 #footer {
   display: flex;
   width: 100%;
