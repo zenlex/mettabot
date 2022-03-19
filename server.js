@@ -7,26 +7,29 @@ const app = http.createServer(function (request, response) {
   //request logger
   console.log(`request ${request.method} ${request.url}`);
 
-  if(request.url === '/api' && request.method === 'GET'){
+  //routes
+  const {url, method} = request;
+  if((url === '/api' || url === '/api/') && method === 'GET'){
     response.writeHead(200, {contentType: 'application/json'})
     const newmsg  = getMsg();
     console.log('server generated message: ', newmsg)
     response.end(JSON.stringify({text:newmsg}))
   } else {
-    let filePath = './public' + request.url;
-    if (request.url == '/' || request.url == '//') {
+    let filePath = './public' + url;
+    if (url == '/') {
       filePath = './public/index.html';
     }
 
+  //mime types
     const extname = String(path.extname(filePath)).toLowerCase();
     var mimeTypes = {
         '.html' : 'text/html',
         '.js': 'text/javascript',
         '.css': 'text/css'
       }
-    console.log({filePath, extname})
     const contentType = mimeTypes[extname] || 'application/octet-stream'
-
+  
+  //return static file or error
     fs.readFile(filePath, function(err, content) {
       if (err) {
         if(err.code == 'ENOENT') {
