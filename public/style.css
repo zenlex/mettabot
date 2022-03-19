@@ -4,34 +4,32 @@
 }
 
 /* base properties */
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   background-color: black;
-  color: white;
-}
-
-#footer {
+  min-height: 100%;
+  padding: 20px;
   display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-#namaste {
-  color: rgba(0, 0, 0, .75);
-  text-shadow: 0px 0px 15px #fff
 }
 
 #message-container {
-  width: 100vw;
-  padding: 10px;
-  margin: 10px auto;
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  margin: auto;
 }
 
 #message, #messagebg {
   position: absolute;
   text-align: center;
-  font-size: 4em;
-  margin: 50px auto;
+  font-size: 3em;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -40,7 +38,7 @@ body {
 /* sliding color gradient behind text*/
 .gradientmask {
   text-transform: uppercase;
-  background-image: linear-gradient(-225deg,
+  background: -webkit-repeating-linear-gradient(-225deg,
       #231557 0%,
       #44107a 29%,
       #ff1361 67%,
@@ -48,13 +46,17 @@ body {
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
-  color: #fff;
-  background-clip: text;
+  color: #FFF;
   color: transparent;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientmask 2s linear infinite alternate;
   display: inline-block;
+}
+
+#messagebg.gradientmask {
+  display: none;
 }
 
 @keyframes gradientmask {

@@ -15,6 +15,7 @@ const setContent = (url) => {
 //add random animation
 const animationClasses = ['gradientmask', 'waterwave', 'jumping-shadows'];
 const animindex = Math.floor(Math.random() * animationClasses.length);
+// const animindex = 0; //for debugging CSS
 msgContainer.className = animationClasses[animindex];
 msgBg.className = animationClasses[animindex];
 
