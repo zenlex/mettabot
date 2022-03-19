@@ -27,6 +27,7 @@ Coming Attractions:
 - Chatbot API
 - Speech Synthesis
 - New Phrase Submission Form
+- Twitter Bot
 
 Under Consideration:
 
