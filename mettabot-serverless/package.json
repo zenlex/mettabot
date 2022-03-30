@@ -1,0 +1,15 @@
+{
+  "name": "mettabot-serverless",
+  "version": "1.0.0",
+  "description": "twitterbot lambda version of mettabot",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zenlex",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "twit": "^2.2.11"
+  }
+}

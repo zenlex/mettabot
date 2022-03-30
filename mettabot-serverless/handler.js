@@ -1,5 +1,5 @@
 'use strict';
-// require('dotenv').config();
+require('dotenv').config();
 const Twit = require('twit');
 
 const T = new Twit({
