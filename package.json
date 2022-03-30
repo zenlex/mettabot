@@ -17,5 +17,8 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "serverless": "^3.10.0"
+  }
 }
