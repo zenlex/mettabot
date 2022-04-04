@@ -1,55 +1,42 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const getMsg = require('./messagegen');
 
-const app = http.createServer(function (request, response) {
-  //request logger
-  console.log(`request ${request.method} ${request.url}`);
+//MIDDLEWARE
+const app = express();
+app.use(cors());
 
-  //routes
-  const {url, method} = request;
-  if((url === '/api' || url === '/api/') && method === 'GET'){
-    response.writeHead(200, {contentType: 'application/json'})
-    const newmsg  = getMsg();
-    console.log('server generated message: ', newmsg)
-    response.end(JSON.stringify({text:newmsg}))
-  } else {
-    let filePath = './public' + url;
-    if (url == '/') {
-      filePath = './public/index.html';
-    }
+// request logger
+app.use((req, res, next) => {
+  console.log(`request ${req.method} ${req.url}`);
+  next();
+});
 
-  //mime types
-    const extname = String(path.extname(filePath)).toLowerCase();
-    var mimeTypes = {
-        '.html' : 'text/html',
-        '.js': 'text/javascript',
-        '.css': 'text/css'
-      }
-    const contentType = mimeTypes[extname] || 'application/octet-stream'
-  
-  //return static file or error
-    fs.readFile(filePath, function(err, content) {
-      if (err) {
-        if(err.code == 'ENOENT') {
-          fs.readFile('./404.html', function(err, content) {
-            response.writeHead(404, { 'Content-Type': 'text/html '});
-            response.end(content, 'utf-8')
-          })
-        }else {
-          response.writeHead(500)
-          response.end('Sorry, off looking for myself...' + error.code)
-        }
-      } else {
-        response.writeHead(200, {"Content-Type": contentType});
-        response.end(content, 'utf-8')
-      }
-    });
-  }
-})
+//routes
+app.get('/ping', (req, res) => {
+  res.send('Hello World');
+});
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT);
-console.log('Mettabot server listening on port: ', PORT)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
+app.get('/api', (req, res) => {
+  const text = getMsg();
+  res.json({ text });
+});
+
+app.get('/:file', (req, res) => {
+  const { file } = req.params;
+  res.sendFile(path.join(__dirname, '/public', file));
+});
+
+app.use((req, res) => {
+  res.sendStatus(404);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log('Mettabot server listening on port: ', PORT);
+});
