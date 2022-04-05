@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const getMsg = require('./messagegen');
 const axios = require('axios');
+const url = require('url');
 
 //MIDDLEWARE
 const app = express();
@@ -44,9 +45,15 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
   });
   const { code } = req.query;
   try {
+    const params = new url.URLSearchParams({
+      code,
+      grant_type: 'authorization_code',
+      code_verifier: 'challenge',
+      redirect_uri: 'https://www.mettabot.app',
+    });
     const twresponse = await axios.post(
       'https://api.twitter.com/2/oauth2/token',
-      { code, grant_type: 'authorization_code' },
+      params.toString(),
       {
         headers: {
           'Authorization': `Basic ${process.env.O2_TWITTER_BASIC_TOKEN}`,
@@ -58,7 +65,7 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     res.send(twresponse);
   } catch (err) {
     console.log(err.message);
-    res.send(err.message);
+    res.send(err);
   }
 });
 
