@@ -32,7 +32,7 @@ app.get('/api/twitter/auth', (req, res) => {
   const basicToken = process.env.O2_TWITTER_BASIC_TOKEN;
   res.header('Authorization', `Basic ${basicToken}`);
   res.redirect(
-    'https://twitter.com/i/oauth2/authorize?response_type=code&redirect_uri=https://www.mettabot.app/api/twitter/oauthcb&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain'
+    'https://twitter.com/i/oauth2/authorize?response_type=code&client_id=VHNyVUF3UXhxRjEtSXpZQndmeVE6MTpjaQ&redirect_uri=https://www.mettabot.app/api/twitter/oauthcb&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain'
   );
 });
 
