@@ -56,7 +56,7 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
       params.toString(),
       {
         headers: {
-          'Authorization': `Basic VkhOeVZVRjNVWGh4UmpFdFNYcFpRbmRtZVZFNk1UcGphUTpYVWVYVDBIMlg2Z09rOGhQSnp3bnNleWRzeWI2NUVJOEY0QnM4YklzUTc0UjQ1Qlp6Zg==`,
+          'Authorization': `Basic ${process.env.O2_TWITTER_BASIC_TOKEN}`,
           'Content-type': 'application/x-www-form-urlencoded',
         },
       }
