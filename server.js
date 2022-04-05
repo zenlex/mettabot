@@ -39,7 +39,7 @@ app.get('/api/twitter/auth', (req, res) => {
 app.get('/api/twitter/oauthcb', (req, res) => {
   console.log('response from twitter auth request: ', {
     body: req.body,
-    params: req.params,
+    qparams: req.query,
   });
 });
 
