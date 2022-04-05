@@ -43,10 +43,9 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     body: req.body,
     qparams: req.query,
   });
-  const { code } = req.query;
   try {
     const params = new url.URLSearchParams({
-      code,
+      code: req.query.code,
       grant_type: 'authorization_code',
       client_id: process.env.O2_TWITTER_ID,
       redirect_uri: 'https://www.mettabot.app',
