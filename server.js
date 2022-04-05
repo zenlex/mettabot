@@ -36,13 +36,13 @@ app.get('/api/twitter/auth', (req, res) => {
   );
 });
 
-app.get('/api/twitter/oauthcb', (req, res) => {
+app.get('/api/twitter/oauthcb', async (req, res) => {
   console.log('response from twitter auth request: ', {
     body: req.body,
     qparams: req.query,
   });
   const { code } = req.query;
-  axios.post(
+  const twresponse = await axios.post(
     'https://api.twitter.com/2/tweets',
     { text: 'test mb tweet' },
     {
@@ -52,6 +52,8 @@ app.get('/api/twitter/oauthcb', (req, res) => {
       },
     }
   );
+  console.log(twresponse);
+  res.send(twresponse.data);
 });
 
 app.get('/:file', (req, res) => {
