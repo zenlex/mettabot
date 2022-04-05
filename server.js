@@ -45,7 +45,7 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
   try {
     const twresponse = await axios.post(
       'https://api.twitter.com/2/tweets',
-      { text: 'test mb tweet' },
+      { 'text': 'test mb tweet' },
       {
         headers: {
           'Authorization': `Bearer ${code}`,
@@ -56,7 +56,8 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     console.log(twresponse.data);
     res.send(twresponse.data);
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    res.send(err.message);
   }
 });
 
