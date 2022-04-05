@@ -42,18 +42,22 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     qparams: req.query,
   });
   const { code } = req.query;
-  const twresponse = await axios.post(
-    'https://api.twitter.com/2/tweets',
-    { text: 'test mb tweet' },
-    {
-      headers: {
-        'Authorization': `Bearer ${code}`,
-        'Content-type': 'application/json',
-      },
-    }
-  );
-  console.log(twresponse);
-  res.send(twresponse.data);
+  try {
+    const twresponse = await axios.post(
+      'https://api.twitter.com/2/tweets',
+      { text: 'test mb tweet' },
+      {
+        headers: {
+          'Authorization': `Bearer ${code}`,
+          'Content-type': 'application/json',
+        },
+      }
+    );
+    console.log(twresponse.data);
+    res.send(twresponse.data);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get('/:file', (req, res) => {
