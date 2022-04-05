@@ -30,6 +30,7 @@ app.get('/api', (req, res) => {
 
 app.get('/api/twitter/auth', (req, res) => {
   const basicToken = process.env.O2_TWITTER_BASIC_TOKEN;
+
   res.header('Authorization', `Basic ${basicToken}`);
   res.redirect(
     'https://twitter.com/i/oauth2/authorize?response_type=code&client_id=VHNyVUF3UXhxRjEtSXpZQndmeVE6MTpjaQ&redirect_uri=https://www.mettabot.app/api/twitter/oauthcb&scope=tweet.write&20tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain'
@@ -44,17 +45,17 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
   const { code } = req.query;
   try {
     const twresponse = await axios.post(
-      'https://api.twitter.com/2/tweets',
-      { 'text': 'test mb tweet' },
+      'https://api.twitter.com/2/oauth2/token',
+      { code, grant_type: 'authorization_code' },
       {
         headers: {
-          'Authorization': `Bearer ${code}`,
-          'Content-type': 'application/json',
+          'Authorization': `Basic ${process.env.O2_TWITTER_BASIC_TOKEN}`,
+          'Content-type': 'application/x-www-form-urlencoded',
         },
       }
     );
     console.log(twresponse.data);
-    res.send(twresponse.data);
+    res.send(twresponse);
   } catch (err) {
     console.log(err.message);
     res.send(err.message);
