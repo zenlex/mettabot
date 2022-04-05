@@ -48,8 +48,9 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     const params = new url.URLSearchParams({
       code,
       grant_type: 'authorization_code',
-      code_verifier: 'challenge',
+      client_id: process.env.O2_TWITTER_ID,
       redirect_uri: 'https://www.mettabot.app',
+      code_verifier: 'challenge',
     });
     const twresponse = await axios.post(
       'https://api.twitter.com/2/oauth2/token',
