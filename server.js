@@ -86,7 +86,9 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
           refreshToken,
           expiresIn,
         }) => {
-          const { data } = await loggedClient.v2.tweet(getMsg());
+          const newMsg = getMsg();
+          console.log('message to be tweeted: ', newMsg);
+          const { data } = await loggedClient.v2.tweet(newMsg);
           console.log('data return from tweet attempt: ', data);
         }
       )
