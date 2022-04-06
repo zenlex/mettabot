@@ -31,14 +31,14 @@ app.get('/api', (req, res) => {
   res.json({ text });
 });
 
+//INIT Twitter Client
+const client = new TwitterApi({
+  clientId: process.env.O2_TWITTER_ID,
+  clientSecret: process.env.O2_TWITTER_SECRET,
+});
+
 // authenticator url
 app.get('/api/twitter/auth', async (req, res) => {
-  //INIT Twitter Client
-  const client = new TwitterApi({
-    clientId: process.env.O2_TWITTER_ID,
-    clientSecret: process.env.O2_TWITTER_SECRET,
-  });
-
   const authLink = await client.generateOAuth2AuthLink(
     'https://www.mettabot.app/api/twitter/oauthcb',
     { scope: ['tweet.read', 'user.read', 'tweet.write', 'offline.access'] }
