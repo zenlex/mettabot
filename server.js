@@ -44,7 +44,7 @@ app.get('/api/twitter/auth', async (req, res) => {
     { scope: ['tweet.read', 'user.read', 'tweet.write'] }
   );
   const { authUrl, codeVerifier, state } = authLink;
-  console.log('authlink: ', authlink);
+  console.log('authlink: ', authLink);
   twitCodeVerifier = codeVerifier;
   twitState = state;
   res.redirect(authUrl);
