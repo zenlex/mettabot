@@ -41,9 +41,9 @@ app.get('/api', (req, res) => {
 app.get('/api/twitter/auth', async (req, res) => {
   const authLink = await client.generateOAuth2AuthLink(
     'https://www.mettabot.app/api/twitter/oauthcb',
-    { scope: ['tweet.read', 'user.read', 'tweet.write'] }
+    { scope: ['tweet.read', 'user.read', 'tweet.write', 'offline.access'] }
   );
-  const { authUrl, codeVerifier, state } = authLink;
+  const { url: authUrl, codeVerifier, state } = authLink;
   console.log('authlink: ', authLink);
   twitCodeVerifier = codeVerifier;
   twitState = state;
