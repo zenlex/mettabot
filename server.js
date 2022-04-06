@@ -12,12 +12,6 @@ let twitCodeVerifier;
 const app = express();
 app.use(cors());
 
-//INIT Twitter Client
-const client = new TwitterApi({
-  clientId: process.env.TWITTER_API_KEY,
-  clientSecret: process.env.TWITTER_API_KEY_SECRET,
-});
-
 // request logger
 app.use((req, res, next) => {
   console.log(`request ${req.method} ${req.url}`);
@@ -39,6 +33,12 @@ app.get('/api', (req, res) => {
 
 // authenticator url
 app.get('/api/twitter/auth', async (req, res) => {
+  //INIT Twitter Client
+  const client = new TwitterApi({
+    clientId: process.env.O2_TWITTER_ID,
+    clientSecret: process.env.O2_TWITTER_SECRET,
+  });
+
   const authLink = await client.generateOAuth2AuthLink(
     'https://www.mettabot.app/api/twitter/oauthcb',
     { scope: ['tweet.read', 'user.read', 'tweet.write', 'offline.access'] }
@@ -67,11 +67,6 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
     if (state !== sessionState) {
       return res.status(400).send('Stored tokens did not match');
     }
-
-    const client = new TwitterApi({
-      clientId: process.env.O2_TWITTER_ID,
-      clientSecret: process.env.O2_TWITTER_SECRET,
-    });
 
     client
       .loginWithOAuth2({
