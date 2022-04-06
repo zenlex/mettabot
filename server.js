@@ -87,32 +87,10 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
           expiresIn,
         }) => {
           const { data } = await loggedClient.v2.tweet(getMsg());
+          console.log('data return from tweet attempt: ', data);
         }
       )
       .catch(() => res.status(403).send('Invalid verifier or access tokens!'));
-    /* PREVIOUS ATTEMPT WITHOUT LIBRARY ------------------->
-    //create url encoded params for token req
-    const params = new url.URLSearchParams({
-      code: req.query.code,
-      grant_type: 'authorization_code',
-      client_id: process.env.O2_TWITTER_ID,
-      code_verifier: 'challenge',
-      redirect_uri: 'https://www.mettabot.app',
-    });
-    //request OAuth2 Token
-    const twresponse = await axios.post(
-      'https://api.twitter.com/2/oauth2/token',
-      params.toString(),
-      {
-        headers: {
-          'Authorization': `Basic ${process.env.O2_TWITTER_BASIC_TOKEN}`,
-          'Content-type': 'application/x-www-form-urlencoded',
-        },
-      }
-    );
-    console.log(twresponse.data);
-    res.send(twresponse);
-    */
   } catch (err) {
     console.log(err.message);
     res.send(err);
