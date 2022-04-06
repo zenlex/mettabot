@@ -43,10 +43,11 @@ app.get('/api/twitter/auth', async (req, res) => {
     'https://www.mettabot.app/api/twitter/oauthcb',
     { scope: ['tweet.read', 'user.read', 'tweet.write'] }
   );
-  const { url, codeVerifier, state } = authLink;
+  const { authUrl, codeVerifier, state } = authLink;
+  console.log('authlink: ', authlink);
   twitCodeVerifier = codeVerifier;
   twitState = state;
-  res.redirect(url);
+  res.redirect(authUrl);
 });
 
 // twitter callback url for code request
