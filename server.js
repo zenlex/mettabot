@@ -40,7 +40,7 @@ const client = new TwitterApi({
 // authenticator url
 app.get('/api/twitter/auth', async (req, res) => {
   const authLink = await client.generateOAuth2AuthLink(
-    'http://www.mettabot.app/api/twitter/oauthcb',
+    'https://www.mettabot.app/api/twitter/oauthcb',
     { scope: ['tweet.read', 'user.read', 'tweet.write', 'offline.access'] }
   );
   const { url: authUrl, codeVerifier, state } = authLink;
