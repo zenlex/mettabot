@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -37,12 +38,16 @@ const client = new TwitterApi({
   clientSecret: process.env.O2_TWITTER_SECRET,
 });
 
+const callbackUrl =
+  process.env.NODE_ENV === 'dev'
+    ? `http://127.0.0.1:3000/api/twitter/oauthcb`
+    : 'https://www.mettabot.app/api/twitter/oauthcb';
+
 // authenticator url
 app.get('/api/twitter/auth', async (req, res) => {
-  const authLink = await client.generateOAuth2AuthLink(
-    'https://www.mettabot.app/api/twitter/oauthcb',
-    { scope: ['tweet.read', 'users.read', 'tweet.write', 'offline.access'] }
-  );
+  const authLink = await client.generateOAuth2AuthLink(callbackUrl, {
+    scope: ['tweet.read', 'users.read', 'tweet.write', 'offline.access'],
+  });
   const { url: authUrl, codeVerifier, state } = authLink;
   console.log('authlink: ', authLink);
   twitCodeVerifier = codeVerifier;
@@ -53,45 +58,45 @@ app.get('/api/twitter/auth', async (req, res) => {
 // twitter callback url for code request
 app.get('/api/twitter/oauthcb', async (req, res) => {
   console.log('response from twitter auth request: ', {
-    body: req.body,
     qparams: req.query,
   });
-  try {
-    const { state, code } = req.query;
-    const codeVerifier = twitCodeVerifier;
-    const sessionState = twitState;
+  const { state, code } = req.query;
+  const codeVerifier = twitCodeVerifier;
+  const sessionState = twitState;
 
-    if (!codeVerifier || !state || !sessionState || !code) {
-      return res.status(400).send('App denied or session expired');
-    }
-    if (state !== sessionState) {
-      return res.status(400).send('Stored tokens did not match');
-    }
-
-    client
-      .loginWithOAuth2({
-        code,
-        codeVerifier,
-        redirectUri: 'https://www.mettabot.app',
-      })
-      .then(
-        async ({
-          client: loggedClient,
-          accessToken,
-          refreshToken,
-          expiresIn,
-        }) => {
-          const newMsg = getMsg();
-          console.log('message to be tweeted: ', newMsg);
-          const { data } = await loggedClient.v2.tweet(newMsg);
-          console.log('data return from tweet attempt: ', data);
-        }
-      )
-      .catch(() => res.status(403).send('Invalid verifier or access tokens!'));
-  } catch (err) {
-    console.log(err.message);
-    res.send(err);
+  if (!codeVerifier || !state || !sessionState || !code) {
+    return res.status(400).send('App denied or session expired');
   }
+  if (state !== sessionState) {
+    return res.status(400).send('Stored tokens did not match');
+  }
+  const client = new TwitterApi({
+    clientId: process.env.O2_TWITTER_ID,
+    clientSecret: process.env.O2_TWITTER_SECRET,
+  });
+  client
+    .loginWithOAuth2({
+      code,
+      codeVerifier,
+      redirectUri: callbackUrl,
+    })
+    .then(
+      async ({
+        client: loggedClient,
+        accessToken,
+        refreshToken,
+        expiresIn,
+      }) => {
+        const newMsg = getMsg();
+        console.log('message to be tweeted: ', newMsg);
+        const { data } = await loggedClient.v2.tweet(newMsg);
+        console.log('data return from tweet attempt: ', data);
+      }
+    )
+    .catch((err) => {
+      res.send(err);
+      // res.status(403).send('Invalid verifier or access tokens!'));
+    });
 });
 
 app.get('/:file', (req, res) => {
