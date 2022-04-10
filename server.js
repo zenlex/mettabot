@@ -44,7 +44,7 @@ const callbackUrl =
     : 'https://www.mettabot.app/api/twitter/oauthcb';
 
 // authenticator url
-app.get('/api/twitter/auth', async (req, res) => {
+app.get('/api/twitter/asme', async (req, res) => {
   const authLink = await client.generateOAuth2AuthLink(callbackUrl, {
     scope: ['tweet.read', 'users.read', 'tweet.write', 'offline.access'],
   });
@@ -91,6 +91,7 @@ app.get('/api/twitter/oauthcb', async (req, res) => {
         console.log('message to be tweeted: ', newMsg);
         const { data } = await loggedClient.v2.tweet(newMsg);
         console.log('data return from tweet attempt: ', data);
+        res.redirect(`https://www.twitter.com/anyuser/status/${data.id}`);
       }
     )
     .catch((err) => {
