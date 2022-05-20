@@ -10,6 +10,8 @@
 ### Short Description
 A pep talk generator for experimenting with css/svg animation, speech synthesis, and chat bot APIs. 
 
+[Live Demo](https://www.mettabot.app)
+
 ### Table of Contents
 - [Background](#background)
 - [Install](#install)
