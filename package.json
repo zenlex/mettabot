@@ -1,5 +1,5 @@
 {
-  "name": "mettabot-server",
+  "name": "mettabot-static",
   "version": "1.0.0",
   "description": "A pep talk generator for experimenting with css/svg animation, speech synthesis, and chat bot APIs.",
   "main": "server.js",
@@ -22,5 +22,13 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "twitter-api-v2": "^1.11.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenlex/mettabot-static.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zenlex/mettabot-static/issues"
+  },
+  "homepage": "https://github.com/zenlex/mettabot-static#readme"
 }

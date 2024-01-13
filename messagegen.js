@@ -6,10 +6,8 @@ const p4 = require('./messages/p4closer.js');
 
 //insert random message - replace/build this out into proper back end
 
-const newmsg = () => `${p1[Math.floor(Math.random() * p1.length)]} ${
-  p2[Math.floor(Math.random() * p2.length)]
-} ${p3[Math.floor(Math.random() * p3.length)]} ${
-  p4[Math.floor(Math.random() * p4.length)]
-}`;
+const newmsg = () => `${p1[Math.floor(Math.random() * p1.length)]} ${p2[Math.floor(Math.random() * p2.length)]
+  } ${p3[Math.floor(Math.random() * p3.length)]} ${p4[Math.floor(Math.random() * p4.length)]
+  }`;
 
-module.exports = newmsg;
+module.exports = { newmsg };
